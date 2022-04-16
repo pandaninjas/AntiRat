@@ -8,11 +8,12 @@ import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import me.mindlessly.antirat.utils.Console;
 import me.mindlessly.antirat.utils.Utils;
 
 public class AntiRat {
-
 	private Scanner scanner;
+	private Console console;
 
 	public static void main(String args[]) {
 		AntiRat m = new AntiRat();
@@ -24,6 +25,9 @@ public class AntiRat {
 	}
 
 	private void onEnable() throws IOException {
+		console = new Console();
+		System.setOut(console.getOut());
+		System.setIn(console.getIn());
 		int count = 0;
 		File folder = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/Roaming/.minecraft/mods");
 		File[] contents = folder.listFiles();
@@ -59,7 +63,9 @@ public class AntiRat {
 				}
 			}
 		}
-		scanner.close();
+		if(scanner !=null) {
+			scanner.close();
+		}
 	}
 
 }

@@ -27,7 +27,7 @@ public class Utils {
 		BufferedReader br = new BufferedReader(reader);
 		List<String> lines = br.lines().collect(Collectors.toList());
 		Path rootDir = Paths.get(".").normalize().toAbsolutePath();
-		File f = new File(rootDir.toString() +"/src/checks.txt");
+		File f = new File(rootDir.toString() +"/src/main/resources/checks.txt");
 		try (BufferedReader b = new BufferedReader(new FileReader(f))) {
 			String bad;
 			while ((bad = b.readLine()) != null) {

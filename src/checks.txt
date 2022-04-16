@@ -1,0 +1,9 @@
+Minecraft.func_71410_x().func_110432_I().func_111286_b()
+Minecraft.getMinecraft().getSession().getToken()
+discord.com/api/webhooks
+launcher_profiles.json
+media.guilded.gg/webhooks/
+checkip.amazonaws
+System.getProperty
+Chrome
+Opera

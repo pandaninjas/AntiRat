@@ -3,7 +3,6 @@ package me.mindlessly.antirat;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
@@ -12,7 +11,7 @@ import java.util.zip.ZipFile;
 import me.mindlessly.antirat.utils.Utils;
 
 public class AntiRat {
-	
+
 	private Scanner scanner;
 
 	public static void main(String args[]) {
@@ -31,7 +30,7 @@ public class AntiRat {
 		for (File file : contents) {
 			count = 0;
 			if (Utils.getExtensionByStringHandling(file.getName()).get().equals("jar")) {
-				System.out.println("Currently scanning "+file.getName());
+				System.out.println("Currently scanning " + file.getName());
 				ZipFile zip = new ZipFile(file);
 				if (file != null) {
 					Enumeration<? extends ZipEntry> entries = zip.entries();
@@ -53,7 +52,7 @@ public class AntiRat {
 							} else {
 								System.out.println("File not deleted.");
 							}
-						}else {
+						} else {
 							System.out.println("File is likely safe.");
 						}
 					}

@@ -27,14 +27,14 @@ public class Utils {
 		BufferedReader br = new BufferedReader(reader);
 		List<String> lines = br.lines().collect(Collectors.toList());
 		Path rootDir = Paths.get(".").normalize().toAbsolutePath();
-		File f = new File(rootDir.toString() +"/src/main/resources/checks.txt");
+		File f = new File(rootDir.toString() + "/src/main/resources/checks.txt");
 		try (BufferedReader b = new BufferedReader(new FileReader(f))) {
 			String bad;
 			while ((bad = b.readLine()) != null) {
-				for(String line: lines) {
+				for (String line : lines) {
 					if (line.contains(bad)) {
 						count++;
-						System.out.println("Red flag referenced - "+bad);
+						System.out.println("Red flag referenced - " + bad);
 					}
 				}
 			}
@@ -42,5 +42,4 @@ public class Utils {
 		return count;
 	}
 
-	
 }

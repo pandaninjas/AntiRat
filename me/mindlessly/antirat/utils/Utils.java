@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -24,14 +25,17 @@ public class Utils {
 		int count = 0;
 		Reader reader = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(reader);
-		String content = br.lines().collect(Collectors.joining());
+		List<String> lines = br.lines().collect(Collectors.toList());
 		Path rootDir = Paths.get(".").normalize().toAbsolutePath();
 		File f = new File(rootDir.toString() +"/src/checks.txt");
 		try (BufferedReader b = new BufferedReader(new FileReader(f))) {
-			String line;
-			while ((line = b.readLine()) != null) {
-				if (content.contains(line)) {
-					count++;
+			String bad;
+			while ((bad = b.readLine()) != null) {
+				for(String line: lines) {
+					if (line.contains(bad)) {
+						count++;
+						System.out.println("Red flag referenced - "+bad);
+					}
 				}
 			}
 		}

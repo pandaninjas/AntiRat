@@ -5,5 +5,3 @@ launcher_profiles.json
 media.guilded.gg/webhooks/
 checkip.amazonaws
 System.getProperty
-Chrome
-Opera

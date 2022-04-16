@@ -1,20 +1,24 @@
 package me.mindlessly.antirat.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Utils {
 
-	public static Optional<String> getExtensionByStringHandling(String filename) {
-		return Optional.ofNullable(filename).filter(f -> f.contains("."))
-				.map(f -> f.substring(filename.lastIndexOf(".") + 1));
+	public static String getFileExtension(File file) {
+		String name = file.getName();
+		int lastIndexOf = name.lastIndexOf(".");
+		if (lastIndexOf == -1) {
+			return "";
+		}
+		return name.substring(lastIndexOf);
 	}
 
 	public static int checkForRat(InputStream is) throws FileNotFoundException, IOException {

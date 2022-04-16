@@ -9,6 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import me.mindlessly.antirat.utils.Console;
+import me.mindlessly.antirat.utils.OSValidator;
 import me.mindlessly.antirat.utils.Utils;
 
 public class AntiRat {
@@ -29,11 +30,22 @@ public class AntiRat {
 		System.setOut(console.getOut());
 		System.setIn(console.getIn());
 		int count = 0;
-		File folder = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/Roaming/.minecraft/mods");
+		File folder = null;
+		
+		if(OSValidator.isWindows()) {
+			folder = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/Roaming/.minecraft/mods");
+		}else if(OSValidator.isMac()) {
+			folder = new File("~/Library/Application Support/minecraft/mods");
+		}else if(OSValidator.isUnix()) {
+			folder = new File("/home/"+System.getProperty("user.name")+"/.minecraft/mods");
+		}else {
+			System.out.println("Your OS is not supported!");
+			return;
+		}
 		File[] contents = folder.listFiles();
 		for (File file : contents) {
 			count = 0;
-			if (Utils.getExtensionByStringHandling(file.getName()).get().equals("jar")) {
+			if (Utils.getFileExtension(file).equals(".jar")) {
 				System.out.println("Currently scanning " + file.getName());
 				ZipFile zip = new ZipFile(file);
 				if (file != null) {
@@ -63,7 +75,7 @@ public class AntiRat {
 				}
 			}
 		}
-		if(scanner !=null) {
+		if (scanner != null) {
 			scanner.close();
 		}
 	}

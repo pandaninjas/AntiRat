@@ -46,7 +46,7 @@ public class Utils {
 				for (String s : toCheck) {
 					if (s.contains(bad)) {
 						System.out.println("Red flag referenced - " + bad);
-						if(s.toLowerCase().contains("discord")) {
+						if(s.toLowerCase().contains("discord.com/api/webhooks")) {
 							System.out.println("Webhook - "+s);
 						}
 						count++;

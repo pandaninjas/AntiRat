@@ -1,5 +1,6 @@
-func_111286_b
-func_148254_d
+getToken
+addEmbed
+getSessionID
 discord.com/api/webhooks
 launcher_profiles.json
 media.guilded.gg/webhooks/

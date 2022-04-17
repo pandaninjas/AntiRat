@@ -27,6 +27,10 @@ import javax.swing.text.StyledDocument;
  */
 public class Console extends JTextPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	DocOutputStream out;
 	PrintStream pout;
 	DocInputStream in;

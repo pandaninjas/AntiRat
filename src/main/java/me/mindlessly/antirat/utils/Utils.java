@@ -42,6 +42,7 @@ public class Utils {
 				for (String s : toCheck) {
 					if (s.contains(bad)) {
 						if (s.toLowerCase().contains("discord")) {
+							//To anyone who cringes at this, I was working with the fields and methods for a while although I was having trouble with this particular thing, I don't intend to leave it like this
 							String webhook = s.substring(s.indexOf("(") +2);
 							webhook = webhook.substring(0, webhook.indexOf(")") - 1);
 							System.out.println("Red flag referenced (Discord Webhook) - " + webhook);

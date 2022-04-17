@@ -3,6 +3,7 @@ package me.mindlessly.antirat.utils;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,10 +15,13 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 
 import me.mindlessly.antirat.AntiRat;
 
@@ -41,13 +45,9 @@ public class Utils {
 			while ((bad = b.readLine()) != null) {
 				for (String s : toCheck) {
 					if (s.contains(bad)) {
-						if (s.toLowerCase().contains("discord")) {
-							//To anyone who cringes at this, I was working with the fields and methods for a while although I was having trouble with this particular thing, I don't intend to leave it like this
-							String webhook = s.substring(s.indexOf("(") +2);
-							webhook = webhook.substring(0, webhook.indexOf(")") - 1);
-							System.out.println("Red flag referenced (Discord Webhook) - " + webhook);
-						} else {
-							System.out.println("Red flag referenced - " + bad);
+						System.out.println("Red flag referenced - " + bad);
+						if(s.toLowerCase().contains("discord")) {
+							System.out.println("Webhook - "+s);
 						}
 						count++;
 					}
@@ -64,10 +64,12 @@ public class Utils {
 				ClassParser cp = new ClassParser(f.getAbsolutePath());
 				JavaClass jc = cp.parse();
 				ArrayList<String> toCheck = new ArrayList<>();
-				Constant[] constantPool = jc.getConstantPool().getConstantPool();
-				for (Constant constant : constantPool) {
-					if (constant != null) {
-						toCheck.add(constant.toString());
+				ConstantPool constantPool = jc.getConstantPool();
+				for(int i = 0; i < constantPool.getConstantPool().length; i++) {
+					Constant c = constantPool.getConstant(i);
+					if (c != null) {
+						String toAdd = constantPool.constantToString(c);
+						toCheck.add(toAdd);
 					}
 				}
 				checkForRat(toCheck);

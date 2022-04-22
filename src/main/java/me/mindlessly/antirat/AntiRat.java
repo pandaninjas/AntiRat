@@ -45,6 +45,7 @@ public class AntiRat {
 			return;
 		}
 		File[] contents = folder.listFiles();
+		File srcDir = new File(folder.getPath()+ "/AntiRat");
 		for (File file : contents) {
 			count = 0;
 			if (Utils.getFileExtension(file).equals(".jar")) {
@@ -52,7 +53,6 @@ public class AntiRat {
 				ZipFile zip = new ZipFile(file);
 				Utils.extractFolder(zip.getName(), file.getParent() + "/AntiRat");
 				zip.close();
-				File srcDir = new File(file.getParent() + "/AntiRat");
 				File[] classes = srcDir.listFiles();
 				if (file != null) {
 					Utils.checkThroughClasses(classes);
@@ -60,7 +60,8 @@ public class AntiRat {
 						System.out.println("A total of " + count + " red flags have been found.");
 						System.out.println("Would you like to delete " + file.getName() + "? (Y/N)");
 						scanner = new Scanner(System.in);
-						String decision = scanner.next();
+						String decision = scanner.nextLine();
+						decision = String.valueOf(decision.charAt(decision.length() - 1));
 						if (decision.equalsIgnoreCase("Y")) {
 							file.delete();
 							System.out.println("File deleted.");
@@ -73,9 +74,10 @@ public class AntiRat {
 					recursiveFileRemove(classes);
 
 				}
-				srcDir.delete();
 			}
 		}
+		srcDir.delete();
+		System.exit(0);
 		if (scanner != null) {
 			scanner.close();
 		}

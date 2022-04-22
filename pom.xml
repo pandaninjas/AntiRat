@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.mindlessly</groupId>
 	<artifactId>AntiRat</artifactId>
-	<version>0.1.4-SNAPSHOT</version>
+	<version>0.1.5-SNAPSHOT</version>
 	<name>AntiRat</name>
 	<description>rat be gone
 </description>
